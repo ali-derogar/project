@@ -1,0 +1,110 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% load ratings %}
+{% block title %}{{object.title}}{% endblock %}
+{% load comment_tags %} {# Loading the template tag #}
+{% load base_tag %}
+{% load humanize %}
+{% block main %}
+
+<!-- start container -->
+<div class="site-blocks-cover" style="background: url({{object.thumbnail.url}});" data-aos="fade">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12 mt-lg-5 text-center">
+                <h1 class="mb-4">{{object.title}}</h1>
+                <a target="_blank" href="https://github.com/ali-derogar/project" class="h1 btn btn-outline-dark">برای
+                    دیدن سورس کد در گیت هاب کلیک کنید</a>
+            </div>
+            <small class="text-lead ">{% ratings object %}</small>
+        </div>
+    </div>
+</div>
+<hr class="border border-5 border-secondry rounded-pill w-50 text-center">
+
+<!-- end container -->
+<!-- start body  -->
+<div class="mt-3">
+    <div class="row d-flex justify-content-around align-items-center">
+        <!-- start right section -->
+        <div id="d7" class="w-75 card mb-3">
+            {% if user.is_superuser or user == object.author or user.is_authenticated and user.is_special_user %}
+            <div id="d8" class="card-body text-end ">
+                <p class="lead mt-md-5 mx-auto">{{object.descriptions}}</p>
+                <ol class="breadcrumb">
+                    {% for cat in object.category.active %}
+                    <li class="breadcrumb-item"><a href="{% url 'web:category' cat.slug %}">{{cat.title}}</a></li>
+                    {% endfor %}
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {% if object.is_special %}
+                        <small class="alert-info">این مقاله ویژه است</small>
+                        {% endif %}
+                    </li>
+                    <nav aria-label="breadcrumb">
+                </ol>
+                <p class="card-text"><small class="text-muted">{{ object.published|naturaltime }}</small></p>
+                <!-- gallery -->
+                <p class="card-text">
+                    <small class="text-muted">
+                        <a href="{% url 'web:author' object.author %}">
+                            <h6>نویسنده : {{object.author.get_full_name}}</h6>
+                        </a>
+                    </small>
+                </p>
+                <!-- **************************** -->
+                <hr class="border border-5 border-secondry rounded-pill w-50 text-center">
+                    <div id="slider" class="mx-auto my-3 text-center">
+                        <div class="slideshows">
+                            <div class="slides">
+                                {% for s in object.slide.all %}
+                                <div class="slide">
+                                    <img src="{{s.image.url}}" alt="sheep">
+                                    <div>
+                                        <p>my beautiful sheep</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <span class="prev">&#10094</span>
+                            <span class="next">&#10095</span>
+                            <div class="point">
+                                <span class="active"></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                <!-- **************************** -->
+            </div>
+            <div class="card-body">
+                {% include_bootstrap %}
+                {% render_comments object request %}
+            </div>
+            {% else %}
+            <h2 class="alert alert-primary">برای تهیه اشتراک ویژه
+                <a href="#">
+                    <span class="ntb btn-outline-danger rounded-5">
+                        اینجا
+                    </span>
+                </a>
+                کلیک کنید !
+            </h2>
+            {% endif %}
+        </div>
+        <!-- end right section -->
+        <!-- start left section -->
+        <!-- end left section -->
+
+    </div>
+</div>
+
+<!-- start footer -->
+{% include 'web/footer.html' %}
+<!-- end section footer -->
+</div> <!-- .site-wrap -->
+<!-- end body  -->
+
+
+{% endblock %}

@@ -1,0 +1,125 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V2</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'registration/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div>
+					{% if form.non_feilds.errors %}
+						{% for i in form.non_feilds.errors %}
+							<span>{{i}}</span>
+						{% endfor %}
+					{% endif %}
+				</div>
+				<form method="post" class="login100-form validate-form">{%  csrf_token %}
+					<span class="login100-form-title p-b-26">
+						ساخت اکانت
+					</span>
+                        <div class="wrap-input100 validate-input">
+                            {{form.username|add_class:"input100"}}
+                                {% if form.username.errors %}
+                                    {% for i in form.username.errors %}
+                                        <span>{{i}}</span>
+                                    {% endfor %}
+                                {% endif %}
+                            <span class="focus-input100 lead" data-placeholder="نام کاربری "></span></b>
+                            
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+                            {{form.email|add_class:"input100"}}
+                                {% if form.email.errors %}
+                                    {% for i in form.email.errors %}
+                                        <span>{{i}}</span>
+                                    {% endfor %}
+                                {% endif %}
+                            <span class="focus-input100 lead" data-placeholder="ایمیل "></span></b>
+                            
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <span class="btn-show-pass">
+                                <i class="zmdi zmdi-eye"></i>
+                            </span>
+                            {{form.password1|add_class:"input100"}}
+                                {% if form.password1.errors %}
+                                    {% for i in form.password1.errors %}
+                                        <span>{{i}}</span>
+                                    {% endfor %}
+                                {% endif %}
+                            <span class="focus-input100" data-placeholder=" رمز "></span>
+                        </div> 
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <span class="btn-show-pass">
+                                <i class="zmdi zmdi-eye"></i>
+                            </span>
+                            {{form.password2|add_class:"input100"}}
+                                {% if form.password2.errors %}
+                                    {% for i in form.password2.errors %}
+                                        <span>{{i}}</span>
+                                    {% endfor %}
+                                {% endif %}
+                            <span class="focus-input100" data-placeholder="تکرار رمز "></span>
+                        </div>            
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn">
+                                    ثبت
+                                </button>
+                            </div>
+                        </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="{% static 'registration/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'registration/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'registration/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'registration/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'registration/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'registration/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'registration/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'registration/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'registration/js/main.js' %}"></script>
+
+</body>
+</html>

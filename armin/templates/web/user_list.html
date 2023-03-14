@@ -1,0 +1,11 @@
+{% extends 'web/list.html' %}
+{% block title %}{{author.username}}{% endblock %}
+
+{% block header %}{{author.username}}{% endblock %}
+
+{% block url %}
+    {% url 'web:author' author.username page_obj.next_page_number %}
+{% endblock %}
+{% block urll %}
+    {% url 'web:author' author.username page_obj.previous_page_number %}
+{% endblock %}

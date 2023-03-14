@@ -1,0 +1,64 @@
+{% extends 'registration/base.html' %}
+{% load gravatar %}
+{% load crispy_forms_tags %}
+{% block head %}ویرایش مقاله {% endblock %}
+{% block main %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ویرایش پروفایل </title>
+    </head>
+    <body>
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title mb-0 float-left">پرفایل</h3>
+            </div>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <div class="card card-body">
+                <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-12">
+                            {{form.username|as_crispy_field}}
+                        </div>
+                        <div class="col-6">
+                            {{form.first_name|as_crispy_field}}
+                        </div>
+                        <div class="col-6">
+                            {{form.last_name|as_crispy_field}}
+                        </div>
+                        <div class="col-12 alert alert-dark">
+                            <label class="my-4">گذرواژه :</label>
+                            <span>اگر می خواهید گذرواژه را تغییر دهید اینجا 
+                                <a class="btn btn-success" href="{% url 'password_change' %}">
+                                    کلیک</a>
+                                کنید
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            {{form.email|as_crispy_field}}
+                            {{form.is_author|as_crispy_field}}
+                        </div>
+                        <div class="col-6"> 
+                            {{form.special_user|as_crispy_field}}
+                        </div>
+                        {% gravatar user.email %}
+                    </div>
+            </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    </div>
+                </form>
+            <!-- /.card -->
+        </div>
+    </body>
+    </html>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'registration/base.html' %}
+{% block head %}بخش اصلی{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+            <h3 class="card card-body ">فهرست مقالات</h3>
+
+            <div class="card-tools">
+            </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>عنوان</th>
+                    <th>نویسنده</th>
+                    <th>توضیحات</th>
+                    <th>تصویر</th>
+                    <th>زمان انتشار</th>
+                    <th>لینک</th>
+                    <th>ویژه بودن مقاله</th>
+                    <th>دسته بندی</th>
+                    <th>وضعیت انتشار</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in object_list %}
+                <tr>
+                    {% if user.is_superuser or i.status in 'db'|make_list %}
+                        <td><a href="{% url 'account:article_update' i.pk %}">{{i.title}}</a></td>
+                    {% else %}
+                        <td>{{i.title}}</td>
+                    {% endif %}
+                    <td>{{i.author}}</td>
+                    <td>{{i.descriptions|truncatewords:5|safe}}</td>
+                    <td><img style='width: 160px;height: 110px; border:1px solid pink;border-radius:15px 0 15px 0;' src={{i.thumbnail.url}}></td>
+                    <td>{{i.jpublish}}</td>
+                    <td>{{i.slug}}</td>
+                    <td>
+                        {% if i.is_special == True %}         
+                                <i class="fa fa-check-circle" style="color:green"></i>
+                        {% else %}
+                                <i class="fa fa-minus-circle" style="color:red"></i>
+                        {% endif %}
+                    </td>
+                    <td>{{i.category_to_str}}</td>
+                    <td>
+                        {% if i.status == 'p' %}
+                            <span class="badge badge-success">منتشر شده</span>
+                            <a href="{% url 'web:detail' i.slug %}">
+                                <br>
+                                <span class="badge badge-warning">تماشا در سایت</span>
+                                <br>
+                            </a>
+                        {% elif i.status == 'd' %}
+                            <span class="badge badge-info">منتشر نشده</span>
+                            <br>
+                            <a href="{% url 'account:detail_preview' i.slug %}">
+                                <span class="badge badge-warning">پیش نمایش در سایت</span>
+                            </a>
+                        {% elif i.status == 'i' %}
+                            <span class="badge badge-secondary">درحال بررسی</span>
+                            <br>
+                            <a href="{% url 'account:detail_preview' i.slug %}">
+                                <span class="badge badge-warning">پیش نمایش در سایت</span>
+                            </a>
+                        {% elif i.status == 'b' %}
+                            <span class="badge badge-secondary">برگشت داده شده</span>
+                            <br>
+                            <a href="{% url 'account:detail_preview' i.slug %}">
+                                <span class="badge badge-warning">پیش نمایش در سایت</span>
+                            </a>
+                        {% endif %}
+                        {% if user.is_superuser%}
+                        <a href="{% url 'account:article_delete' i.pk %}">
+                            <span class="badge badge-danger">حذف مقاله ؟</span>
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

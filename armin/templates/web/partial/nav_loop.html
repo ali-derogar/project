@@ -1,0 +1,25 @@
+<ul class="dropdown">
+    {% for i in i.child.active %}
+    {% if not i.child.active %}
+    <li class="has-children">
+        <a href="{% url 'web:category' i.slug %}">{{i.title}}</a>
+    </li>
+    {% endif %}
+    {% if i.child.active%}
+    <li class="nav-item dropdown dropdown-item">
+        <a class="nav-link dropdown-toggle" href="{% url 'web:category' i.slug %}" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            {{i.title}}
+        </a>
+    </li>
+    <li class="has-children">
+        <a href="#">{{i.title}}
+            <ul class="dropdown">
+                {% for i in i.child.active %}
+                <li><a href="{% url 'web:category' i.slug %}">{{i.title}}</a></li>
+                {% endfor %}
+            </ul>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>

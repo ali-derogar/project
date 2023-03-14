@@ -1,0 +1,14 @@
+{% extends 'web/list.html' %}
+{% block title %}{{category.title}}{% endblock %}
+
+{% block header %}{{category.title}}{% endblock %}
+
+{% block url %}
+    {% url 'web:category' category.slug page_obj.next_page_number %}
+{% endblock %}
+{% block urll %}
+    {% url 'web:category' category.slug page_obj.previous_page_number %}
+{% endblock %}
+
+
+

@@ -1,0 +1,44 @@
+{% load static %}
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <!-- Add icons to the links using the .nav-icon class
+          with font-awesome or any other icon font library -->
+      {% if user.is_superuser or user.is_author %}
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              مقالات
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{% url 'account:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                <i class="fa fa-list nav-icon"></i>
+                <p>فهرست مقالات</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'account:article_create' %}" class="nav-link {% if request.resolver_match.url_name == 'article_create' %}active{% endif %}">
+                  <i class="fa fa-edit nav-icon"></i>
+                  <p>افزودن مقاله جدید</p>
+                </a>
+              </li>
+            </ul>
+        </li>
+      {% endif %}
+      <li class="nav-item">
+        <a href="{% url 'account:profile' %}" class="nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+          <i class="nav-icon fas fa-th"></i>
+          <p>
+            پرفایل
+            <span class="right badge badge-danger">جدید</span>
+          </p>
+        </a>
+      </li>
+      
+    </ul>
+  </nav>

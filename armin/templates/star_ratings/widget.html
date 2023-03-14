@@ -1,0 +1,10 @@
+{% extends "star_ratings/widget_base.html" %}
+{% block rating_detail %}
+    <div class=" rounded-pill">
+        {% if not user.is_authenticated %}
+        <a target="_blank" href="{% url 'login' %}"><span class="btn btn-warning rounded-pill">برای ورود و امتیاز دادن کلیک کنید</span></a>
+        {% else %}
+            <span class="bg-warning rounded-pill">امتیاز خود را ثبت کنید</span>
+        {% endif %}
+    </div>
+{% endblock %}

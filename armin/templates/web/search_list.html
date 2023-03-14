@@ -1,0 +1,11 @@
+{% extends 'web/list.html' %}
+{% block title %}{{search}}{% endblock %}
+
+{% block header %}{{search}}{% endblock %}
+
+{% block url %}
+    {% url 'web:search' page_obj.next_page_number %}?q=
+{% endblock %}
+{% block urll %}
+    {% url 'web:search' page_obj.previous_page_number %}?q=
+{% endblock %}

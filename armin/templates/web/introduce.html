@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="des" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'web/introduce/mycss2.css' %}">
+
+
+    <title>Document</title>
+</head>
+
+<body style="background: url({% static 'web/img/25.jpg' %});">
+    <nav>
+        <div class="container p-2">
+            <div class="row">
+                <div class="col-4 mt-md-1">
+                    <h1>خوش آمدید &#128525;</h1>
+                </div>
+                <div class="col-8 text-start align-center">
+                    <a href="{% url 'web:home' %}">
+                        <button class="btn1 h2 text-light">
+                            برای دیدن نمونه پروژه کلیک کنید
+                            <span class="spinner-border"></span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4 col-12 text-center ">
+                <img class="img-fluid" src="{% static 'web/img/7.jpg' %}" alt="armin">
+            </div>
+            <div
+                class="col-12 col-md-8 text-end align-center mt-2 mt-md-1 rounded-5 shadow-lg bg-success bg-opacity-50">
+                <p class="alert alert-success lead rounded-5 mt-2 mt-md-4">
+                    سلام خوش آمدید <br>
+                    علی دروگر هستم <br>دانشجوی ترم 8 دانشگاه یادگار امام
+                    عاشق برنامه نویسی و کار با کامپیوترم<br>
+                    هدف اصلی زندگیم یادگیری و کسب تجربه و مفید بودن در
+                    حوزه خودم هستش و همیشه تمام تلاشم را در جهت
+                    رسیدن به اهداف و وظایف محوله انجام میدهم
+                    &#10004;&#65039;
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="border border-success bg-success rounded-pill">
+            <table class="table table-sm table-striped table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-success h4 pe-4">نوع مهارت</th>
+                        <th scope="col" class="table-success h4 pe-4">درصد تسلط</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in object_list %}
+                    <tr id="{{i.slug}}2">
+                        <th scope="row"> <a type="button" href="#{{i.slug}}"
+                                class="btn btn-outline-success text-light w-100 fw-bolder">{{i.name}}</a>
+                        </th>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{i.number}}%"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container-lg my-5">
+        <div class=" row g-4 mx-md-5">
+            {% for i in object_list %}
+            <div id="d2" class="card d-flex justify-content-center h-50 col-10 mx-auto col-md-3 me-md-4 m3-md-4">
+                <div id="d1" class="shadow-lg"><img src="{{i.pic.url}}" class="card-img-top  img-fluid"
+                        style="height: 13rem;" alt="{{i.name}}"></div>
+                <div id="{{i.slug}}" class="card-body h6 h5-md px-0 px-md-3" style="height: 14rem;overflow-y: scroll;">
+                    <a href="#{{i.slug}}2" class="link-success ">
+                        <h5 class="text-start card-title h5 fw-bolder h3-md">{{i.name}}</h5>
+                    </a>
+                    <hr class="w-75 border border-2 border-success rounded-pill align-center">
+                    <p class="fw-bold text-end card-text overflow-hidden">{{i.about}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer class="container-fluid text-light mt-2">
+        <div class="row bg-dark rounded-5">
+            <h4 class="coll-11 h3 text-center pt-2 mb-5">راه های ارتباطی</h4>
+            <div class="col-12 text-center mt-2">
+                <ul class="text-center mx-auto h5">
+                    <li class="w-100 list-group-item d-flex justify-content-evenly align-items-start ">
+                        شماره تماس : <strong>09211221907</strong>
+                    </li>
+                    <li class="w-100 list-group-item d-flex justify-content-evenly align-items-start ">
+                        ایمیل: <strong>aliderogar1129@gmail.com</strong>
+                    </li>
+                </ul>
+            </div>
+            <hr class="border border-2 border-success rounded-pill justify-center">
+            <div class="col-12 pb-5">
+                <div id="d3" class="row d-flex text-center ">
+                    <div class="col-md-7 col-12 pb-3 pb-md-2 h5 mt-md-4"><strong>شبکه های اجتماعی :</strong></div>
+                    <a class="col-md col" href="3">
+                        <img class="image"
+                            src="{% static 'web/icon/instagram.png' %}">
+                    </a>
+                    <a class="col-md col" href="3">
+                        <img class="image" src="{% static 'web/icon/telegram.png' %}">
+                    </a>
+                    <a class="col-md col " href="3">
+                        <img class="image offset-md-2 "
+                            src="{% static 'web/icon/whatsup.png' %}">
+                    </a>
+                </div>
+            </div>
+    </footer>
+
+    <a href="#">
+        <div class="h4" id="scrollup">
+            &uarr;
+        </div>
+    </a>
+
+
+    <!-- vertical overflow scroll with bootstrap class-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<!-- creat best navbar with bootstrap5 and it have chidren -->

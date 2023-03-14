@@ -1,0 +1,58 @@
+{% load base_tag %}
+
+<div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+</div>
+
+<!-- start navbar-->
+<header class="site-navbar js-sticky-header site-navbar-target h5" role="banner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-6 col-xl-2">
+                <h1 class="mb-0 site-logo">
+                    <a id="d5" href="{% url 'web:introduce' %}" class="h4 p-1 mb-0">
+                        {{title}}
+                    </a>
+                </h1>
+            </div>
+            <div class="col-12 col-md-10 d-none d-xl-block">
+                <nav class="site-navigation position-relative text-right  flt-lft" role="navigation">
+                    <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                        <li>
+                            <form class="d-flex" role="search" action="{% url 'web:search' %}">
+                                <input id="btn1" class="form-control" type="search" placeholder="جستجوی متن ..."
+                                    name="q" aria-label="Search">
+                                <button id="btn1" class="btn btn-outline-success" type="submit">جستجو</button>
+                            </form>
+                        </li>
+                        <li class="text-right"><a href="{% url 'web:home'%}" class="nav-link">صفحه اصلی</a></li>
+                        {% for i in category %}
+                        {% if i.parent == None and not i.child.active %}
+                        <li class="text-right"><a href="{% url 'web:category' i.slug %}" class="nav-link">{{i.title}}</a></li>
+                        {% endif %}
+                        {% if i.parent == None and i.child.active%}
+                        <li class="has-children text-right">
+                            <a href="{% url 'web:category' i.slug %}" class="nav-link">{{i.title}}</a>
+                            {% include 'web/partial/nav_loop.html' %}
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+
+            <div class=" d-inline-block d-xl-none ml-md-0 py-3" style="position: absolute;  left:5%">
+                <a href="#" class="site-menu-toggle js-menu-toggle float-right">
+                    <span class="icon-menu h3">
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</header>

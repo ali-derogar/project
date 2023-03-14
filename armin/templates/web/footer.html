@@ -1,0 +1,40 @@
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="footer-heading mb-4">لینک نمونه پروژه ها</h2>
+                <p>به زودی ....</p>
+                <p>با کلیک بر روی اسم هر نویسنده 
+                    <br>
+                    و همچنین نام کتگوری می توانید 
+                    <br>
+                    به مقالات مرتبط دسترسی پیدا کنید</p>
+            </div>
+
+            <div class="col-md-3 ml-auto">
+                <h2 class="footer-heading mb-4">دسترسی سریع</h2>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'web:home' %}" class="smoothscroll">لیست مقالات</a></li>
+                    <li><a href="{% url 'login' %}" class="smoothscroll">پنل کاربری</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-5">
+                    <h2 class="footer-heading mb-4">راه های ارتباطی</h2>
+                    <br>
+                    <a href="https://wa.me/989211221907" class="pl-0 pr-3"><span class="icon-whatsapp"></span></a>
+                    <a href="https://t.me/username" class="pl-3 pr-3"><span class="icon-telegram"></span></a>
+                    <a href="https://www.instagram.com/armin_dl1129/" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                </div>
+
+                <h2 class="footer-heading mb-4">برای تماس با شما</h2>
+                <form action="{% url 'web:email' %}" method="post"  class="footer-subscribe">
+                    {% csrf_token %}
+                    {% include 'web/email.html' %}
+                </form>
+
+            </div>
+        </div>
+    </div>
+</footer>

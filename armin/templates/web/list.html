@@ -1,0 +1,107 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% load ratings %}
+{% block title %}{% endblock %}
+{% block main %}
+{% load base_tag %}
+{% load humanize %}
+
+<!-- start container -->
+<div class="site-blocks-cover" style="background: url({% static 'web/img/10.png' %});" data-aos="fade">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12 mt-lg-5 text-center">
+                <h1 class="mb-4">{% block header %}محتوای برای نمایش پیدا نشد{% endblock %}</h1>
+                <a target="_blank" href="https://github.com/ali-derogar/project" class="h1 btn btn-outline-dark">برای دیدن سورس کد در گیت هاب کلیک کنید</a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="border border-5 border-secondry rounded-pill w-50 text-center">
+
+<!-- end container -->
+<!-- start body  -->
+<div class="mt-3">
+    <div class="row d-flex justify-content-around align-items-center">
+        <!-- start right section -->
+        <div class="col col-lg-8">
+            {% for i in object_list %}
+            <div id="d6" class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-7 position-relative">
+                        <img src="{{i.thumbnail.url}}" class="img-fluid rounded-start" alt="{{i.title}}">
+                        <div class="position-absolute" style="top:5px; left:25px; opacity: 80%;"><small>{% ratings i %}</small></div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card-body">
+                            <a href="{% url 'web:detail' i.slug %}">
+                                <h5 class="h3 card-title">
+                                    {{i.title}}
+                                </h5>
+                            </a>
+
+                            <hr class="border border-5 border-secondry w-50 rounded-pill mt-md-5">
+                            <p class="lead mt-md-5 card-text">{{i.descriptions|truncatewords:20}}</p>
+                            <ol class="breadcrumb">
+                                {% for cat in i.category.active %}
+                                <li class="breadcrumb-item"><a href="{% url 'web:category' cat.slug %}">{{cat.title}}</a></li>
+                                {% endfor %}
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    {% if i.is_special %}
+                                    <small class="alert-info">این مقاله ویژه است</small>
+                                    {% endif %}
+                                </li>
+                                <nav aria-label="breadcrumb">
+                            </ol>
+                            <p class="card-text"><small class="text-muted">{{ i.published|naturaltime }}</small></p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <a href="{% url 'web:author' i.author %}">
+                                        <h6>نویسنده : {{i.author.get_full_name}}</h6>
+                                    </a>
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end right section -->
+        </div>
+        <!-- start left section -->
+        <div class="col col-lg-3 text-primary">
+            {% popular_article %}
+            <hr>
+            {% hot_article %}
+        </div>
+        <!-- end left section -->
+    </div>
+
+    <nav class="row d-flex justify-content-center" aria-label="...">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a href="{% block urll %}{% endblock %}" class="page-link">صفحه قبل</a>
+            </li>
+            {% endif %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">
+                    {{ request.resolver_match.kwargs.page }}
+                </a>
+            </li>
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a href="{% block url %}{% endblock %}" class="page-link" href="#">صفحه بعد</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+<!-- start footer -->
+{% include 'web/footer.html' %}
+<!-- end section footer -->
+</div> <!-- .site-wrap -->
+<!-- end body  -->
+
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+{% block head %}ویرایش مقاله {% endblock %}
+{% block main %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ویرایش مقاله </title>
+    </head>
+    <body>
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title mb-0 float-left">در اینجا وارد کنید</h3>
+              </div>
+            </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+            <div class="card card-body">
+                <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-6">
+                            {{form.title|as_crispy_field}}
+                        </div>
+                        <div class="col-6">
+                            {{form.published|as_crispy_field}}
+                        </div>
+                        <div class="col-12">
+                            {{form.descriptions|as_crispy_field}}
+                        </div>
+                        <div class="col-6">
+                            {{form.category|as_crispy_field}}
+                            {{form.is_special|as_crispy_field}}
+                        </div>
+                        <div class="col-6">
+                            {{form.slug|as_crispy_field}}
+                            {{form.thumbnail|as_crispy_field}}
+                        </div>
+                        {% if user.is_author and not user.is_superuser %}
+                        <div class="col-12">
+                            <div id="div_id_status" class="form-group">            
+                                <label for="id_status" class=" requiredField">
+                                        وضعیت انتشار<span class="asteriskField">*</span>
+                                </label>
+                            <div>                                 
+                        <select name="status" class="select form-control" required="" id="id_status">
+                          <option value="">---------</option>                        
+                          <option value="d">پیش نویس</option>                                    
+                          <option value="i">ارسال به ادمین</option>                                   
+                        </select>
+                        </div> 
+                        {% endif %}
+                        {% if user.is_superuser %}
+                            <div class="col-6">
+                                {{form.author|as_crispy_field}}
+                            </div>
+                            <div class="col-6">
+                                {{form.status|as_crispy_field}}
+                            </div>
+                        {% endif %}
+                        
+                    </div>
+            </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">ثبت</button>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'account:article_delete' request.resolver_match.kwargs.pk %}">
+                            <span class="btn btn-danger">حذف مقاله ؟</span>
+                        </a>
+                    {% endif %}
+                    </div>
+                </form>
+            <!-- /.card -->
+        </div>
+    </body>
+    </html>
+{% endblock %}

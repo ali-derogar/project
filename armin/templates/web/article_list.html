@@ -1,0 +1,11 @@
+{% extends 'web/list.html' %}
+{% block header %}صفحه نخست{% endblock %}
+{% block title %}خانه{% endblock %}
+
+{% block url %}
+    {% url 'web:home' page_obj.next_page_number %}
+{% endblock %}
+{% block urll %}
+    {% url 'web:home' page_obj.previous_page_number %}
+{% endblock %}
+

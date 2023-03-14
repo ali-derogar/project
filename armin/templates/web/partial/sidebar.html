@@ -1,0 +1,17 @@
+<aside class="alert">
+    <div class="text-center btn btn-dark w-100 h4">{{title}}</div>
+    <table class="table table-sm table-striped table-dark table-hover table-caption-top shadow">
+        <tbody >
+            {% for a in article %}
+            <tr class="rounded-5">
+                <th scope="row" colspan="2"> <a type="button" href="{% url 'web:detail' a.slug %}"
+                        class="btn btn-outline-info text-light w-100 fw-bolder">{{ a.title }}</a>
+                </th>
+                <td>
+                    <div class="btn btn-outline-danger text-light w-100 text-center">{{a.hits.count }}</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</aside>

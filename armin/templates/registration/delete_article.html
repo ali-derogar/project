@@ -1,0 +1,41 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+{% block head %}ایجاد مقاله جدید{% endblock %}
+{% block main %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>حذف مقاله</title>
+    </head>
+    <body>
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title mb-0 float-left">حذف مقاله</h3>
+              </div>
+            </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+            
+            <form method="post">{% csrf_token %}
+                <div class="card card-body">
+                    <h2>آیا می خواهید مقاله
+                     {{object.title}}
+                    که نویسنده‌ی آن
+                    ({{object.author.get_full_name}})
+                     است را پاک کنید؟</h2>
+             </div>
+                <div class="card-footer">
+                <input value="پاک کردن" type="submit" class="btn btn-danger">
+                </div>
+            </form>
+              
+                    
+        </div>
+    </body>
+    </html>
+{% endblock %}

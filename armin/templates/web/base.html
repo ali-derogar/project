@@ -1,0 +1,81 @@
+{% load static %}
+{% load base_tag %}
+<!doctype html>
+<html dir="rtl" lang="en">
+
+<head>
+    <title>article | مقالات</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!--start style-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700, 900|Playfair+Display:400,900"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'web/article/fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <link rel="stylesheet" href="{% static 'web/article/css/bootstrap-rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/article/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'web/article/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/article/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/article/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/article/css/jquery.fancybox.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'web/article/css/bootstrap-datepicker.css' %}">
+
+    <link rel="stylesheet" href="{% static 'web/article/css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'web/article/css/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'web/article/css/mycss1.css' %}">
+    <link rel="stylesheet" href="{% static 'web/slide/slideshow1.css' %}">
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" id="home-section"
+    style="background: url({% static 'web/img/25.jpg' %});">
+
+    <div id="overlayer"></div>
+    <div class="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">بارگذاری...</span>
+        </div>
+    </div>
+
+    <div class="site-wrap">
+        {% nav_barr %}
+
+        <!-- end navbar -->
+
+        <!-- Main Content-->
+        <a href="{% url 'login' %}">
+            <div class="h2" id="login">
+                🤵
+            </div>
+        </a>
+        {% block main %}
+
+        <!-- Page Header-->
+        {% endblock %}
+        
+        <script src="{% static 'web/slide/slideshow.js' %}"></script>
+        <script src="{% static 'web/article/js/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'web/article/js/jquery-ui.js' %}"></script>
+        <script src="{% static 'web/article/js/popper.min.js' %}"></script>
+        <script src="{% static 'web/article/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'web/article/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'web/article/js/jquery.countdown.min.js' %}"></script>
+        <script src="{% static 'web/article/js/jquery.easing.1.3.js' %}"></script>
+        <script src="{% static 'web/article/js/aos.js' %}"></script>
+        <script src="{% static 'web/article/js/jquery.fancybox.min.js' %}"></script>
+        <script src="{% static 'web/article/js/jquery.sticky.js' %}"></script>
+        <script src="{% static 'web/article/js/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'web/article/js/typed.js' %}"></script>
+        <script src="{% static 'web/article/js/main1.js' %}"></script>
+        
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+        
+
+</body>
+
+</html>
